@@ -18,41 +18,57 @@ code {
 
 @layer base {
   :root {
-        --background: 15 15% 5%;
-        --foreground: 60 100% 90%;
-        --card: 20 15% 8%;
-        --card-foreground: 60 100% 90%;
-        --popover: 20 15% 8%;
-        --popover-foreground: 60 100% 90%;
-        --primary: 60 100% 50%;
-        --primary-foreground: 0 0% 0%;
-        --secondary: 0 0% 15%;
-        --secondary-foreground: 0 0% 90%;
-        --muted: 0 0% 12%;
-        --muted-foreground: 0 0% 60%;
-        --accent: 60 100% 50%;
-        --accent-foreground: 0 0% 0%;
-        --destructive: 0 84% 60%;
-        --destructive-foreground: 0 0% 100%;
-        --border: 0 0% 20%;
-        --input: 0 0% 12%;
-        --ring: 60 100% 50%;
-        --chart-1: 60 100% 50%;
-        --chart-2: 120 50% 45%;
-        --chart-3: 240 70% 55%;
-        --chart-4: 300 65% 60%;
-        --chart-5: 180 75% 55%;
-        --radius: 0.75rem;
-    }
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 60 100% 50%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 60 100% 50%;
+    --primary-foreground: 222.2 84% 4.9%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
 }
 
 @layer base {
   * {
-    border-color: hsl(var(--border));
+    @apply border-border;
   }
   body {
-    background-color: hsl(var(--background));
-    color: hsl(var(--foreground));
+    @apply bg-background text-foreground;
   }
 }
 
@@ -93,9 +109,26 @@ code {
   width: 56px;
   height: 56px;
   box-shadow: 0 8px 32px rgba(255, 215, 0, 0.3);
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 1000;
   touch-action: manipulation;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.banana-fab::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.6s ease;
+}
+
+.banana-fab:hover::before {
+  left: 100%;
 }
 
 @media (min-width: 768px) {
@@ -108,8 +141,8 @@ code {
 }
 
 .banana-fab:hover {
-  transform: scale(1.1);
-  box-shadow: 0 12px 40px rgba(255, 215, 0, 0.4);
+  transform: scale(1.15) rotate(5deg);
+  box-shadow: 0 16px 48px rgba(255, 215, 0, 0.5);
 }
 
 .banana-fab:active {
@@ -128,9 +161,26 @@ code {
   width: 48px;
   height: 48px;
   box-shadow: 0 6px 24px rgba(34, 197, 94, 0.3);
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 999;
   touch-action: manipulation;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.widget-add-fab::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.6s ease;
+}
+
+.widget-add-fab:hover::before {
+  left: 100%;
 }
 
 @media (min-width: 768px) {
@@ -141,21 +191,41 @@ code {
 }
 
 .widget-add-fab:hover {
-  transform: scale(1.1);
-  box-shadow: 0 8px 32px rgba(34, 197, 94, 0.4);
+  transform: scale(1.15) rotate(-5deg);
+  box-shadow: 0 12px 40px rgba(34, 197, 94, 0.5);
 }
 
 .price-up {
   color: hsl(var(--primary));
+  animation: priceUp 0.6s ease-out;
 }
 
 .price-down {
   color: hsl(0 84% 60%);
+  animation: priceDown 0.6s ease-out;
+}
+
+@keyframes priceUp {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+@keyframes priceDown {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.9); }
+  100% { transform: scale(1); }
 }
 
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.4); }
-  50% { box-shadow: 0 0 0 10px rgba(255, 215, 0, 0); }
+  0%, 100% { 
+    box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.4);
+    transform: scale(1);
+  }
+  50% { 
+    box-shadow: 0 0 0 20px rgba(255, 215, 0, 0);
+    transform: scale(1.05);
+  }
 }
 
 .pulse-animation {
@@ -180,9 +250,280 @@ code {
     font-size: 1rem;
   }
   
-  .widget-card .text-xl {
-    font-size: 1.125rem;
+  .widget-card .text-base {
+    font-size: 0.875rem;
   }
+}
+
+/* Edit Mode Visual Indicators */
+.edit-mode .react-grid-item {
+  cursor: grab !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+}
+
+.edit-mode .react-grid-item:hover {
+  transform: scale(1.03) translateY(-2px);
+  box-shadow: 0 8px 32px rgba(255, 215, 0, 0.25);
+  border: 2px solid rgba(255, 215, 0, 0.4);
+}
+
+.edit-mode .react-grid-item:active {
+  cursor: grabbing !important;
+  transform: scale(1.01) rotate(1deg);
+}
+
+.edit-mode .react-grid-item .react-resizable-handle {
+  cursor: se-resize !important;
+  background: linear-gradient(135deg, transparent 0%, transparent 50%, rgba(255, 215, 0, 0.7) 50%, rgba(255, 215, 0, 0.9) 100%);
+  border-radius: 0 0 8px 0;
+  transition: all 0.3s ease;
+}
+
+.edit-mode .react-grid-item .react-resizable-handle:hover {
+  background: linear-gradient(135deg, transparent 0%, transparent 50%, rgba(255, 215, 0, 0.9) 50%, rgba(255, 215, 0, 1) 100%);
+  transform: scale(1.1);
+}
+
+/* Widget hover effects in edit mode */
+.edit-mode .widget-card {
+  position: relative;
+}
+
+.edit-mode .widget-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  transition: all 0.4s ease;
+  pointer-events: none;
+  background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+  background-size: 200% 200%;
+  animation: shimmer 2s infinite;
+}
+
+.edit-mode .widget-card:hover::before {
+  border-color: rgba(255, 215, 0, 0.6);
+  box-shadow: 0 0 0 8px rgba(255, 215, 0, 0.1);
+}
+
+/* Drag overlay styling */
+.react-draggable-dragging {
+  opacity: 0.8;
+  transform: rotate(2deg) !important;
+  z-index: 10000 !important;
+}
+
+/* Resize handle styling */
+.react-resizable-handle {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  bottom: 0;
+  right: 0;
+  cursor: se-resize;
+  z-index: 10;
+}
+
+/* Edit mode hint */
+.edit-mode-hint {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 215, 0, 0.15);
+  border: 1px solid rgba(255, 215, 0, 0.4);
+  border-radius: 12px;
+  padding: 12px 20px;
+  color: rgba(255, 215, 0, 0.95);
+  font-size: 14px;
+  z-index: 1001;
+  backdrop-filter: blur(15px);
+  animation: fadeInOut 3s ease-in-out;
+  box-shadow: 0 8px 32px rgba(255, 215, 0, 0.2);
+}
+
+@keyframes fadeInOut {
+  0%, 100% { 
+    opacity: 0; 
+    transform: translateX(-50%) translateY(-10px) scale(0.95); 
+  }
+  20%, 80% { 
+    opacity: 1; 
+    transform: translateX(-50%) translateY(0) scale(1); 
+  }
+}
+
+/* Enhanced grid item styling */
+.edit-mode .react-grid-item {
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+.edit-mode .react-grid-item::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 215, 0, 0.6);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.edit-mode .react-grid-item:hover::after {
+  opacity: 1;
+}
+
+.edit-mode .react-grid-item::before {
+  content: '⋮⋮';
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  color: rgba(255, 215, 0, 0.6);
+  font-size: 12px;
+  font-weight: bold;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 5;
+}
+
+.edit-mode .react-grid-item:hover::before {
+  opacity: 1;
+}
+
+/* Grid drop zone indicators */
+.edit-mode .react-grid-layout {
+  background: linear-gradient(45deg, transparent 49%, rgba(255, 215, 0, 0.05) 50%, transparent 51%);
+  background-size: 20px 20px;
+  min-height: 100vh;
+  position: relative;
+  transition: all 0.5s ease;
+}
+
+.edit-mode .react-grid-layout::after {
+  content: 'Drag widgets here to reposition';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgba(255, 215, 0, 0.3);
+  font-size: 18px;
+  font-weight: 500;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.edit-mode .react-grid-layout:empty::after {
+  opacity: 1;
+  animation: fadeInOut 3s ease-in-out infinite;
+}
+
+/* Widget card enhancements */
+.widget-card {
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.edit-mode .widget-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 215, 0, 0.15);
+}
+
+.edit-mode .widget-card::after {
+  content: '↔';
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  color: rgba(255, 215, 0, 0.6);
+  font-size: 16px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.edit-mode .widget-card:hover::after {
+  opacity: 1;
+}
+
+/* Add widget button enhancements */
+.widget-add-fab {
+  animation: bounce 2s infinite;
+  position: relative;
+}
+
+.widget-add-fab::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #22c55e, #16a34a, #22c55e);
+  border-radius: 50%;
+  z-index: -1;
+  animation: rotate 3s linear infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Template selector enhancements */
+.template-card {
+  transition: all 0.3s ease;
+}
+
+.template-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(255, 215, 0, 0.1);
+}
+
+/* Widget selector preview enhancements */
+.widget-preview {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.widget-preview::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.widget-preview:hover::before {
+  left: 100%;
 }
 
 /* Grid layout responsive adjustments */
@@ -240,4 +581,269 @@ code {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+}
+
+/* Enhanced animations */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInTop {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInBottom {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Enhanced grid layout */
+.edit-mode-grid {
+  background: radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.02) 0%, transparent 70%);
+}
+
+/* Enhanced button interactions */
+button, .btn {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+button::before, .btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.6s ease;
+}
+
+button:hover::before, .btn:hover::before {
+  left: 100%;
+}
+
+/* Enhanced form elements */
+input, select, textarea {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+input:focus, select:focus, textarea:focus {
+  transform: scale(1.02);
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
+}
+
+/* Enhanced card interactions */
+.card {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Enhanced badge interactions */
+.badge {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.badge:hover {
+  transform: scale(1.1);
+}
+
+/* Enhanced icon interactions */
+.icon {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.icon:hover {
+  transform: scale(1.2);
+}
+
+/* Enhanced modal animations */
+.modal-enter {
+  opacity: 0;
+  transform: scale(0.9) translateY(-20px);
+}
+
+.modal-enter-active {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-exit {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+.modal-exit-active {
+  opacity: 0;
+  transform: scale(0.9) translateY(-20px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Enhanced scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 215, 0, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 215, 0, 0.3);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 215, 0, 0.5);
+}
+
+/* Enhanced focus states */
+*:focus {
+  outline: 2px solid rgba(255, 215, 0, 0.5);
+  outline-offset: 2px;
+}
+
+/* Enhanced loading states */
+.loading {
+  position: relative;
+  overflow: hidden;
+}
+
+.loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transparent);
+  animation: shimmer 1.5s infinite;
+}
+
+/* Enhanced hover effects for all interactive elements */
+[data-interactive="true"] {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-interactive="true"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 215, 0, 0.15);
+}
+
+/* Enhanced responsive design */
+@media (max-width: 768px) {
+  .banana-fab:hover {
+    transform: scale(1.1);
+  }
+  
+  .widget-add-fab:hover {
+    transform: scale(1.1);
+  }
+  
+  .edit-mode .react-grid-item:hover {
+    transform: scale(1.01);
+  }
+}
+
+/* Enhanced accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Enhanced dark mode support */
+@media (prefers-color-scheme: dark) {
+  .edit-mode-hint {
+    background: rgba(255, 215, 0, 0.1);
+    border-color: rgba(255, 215, 0, 0.3);
+  }
+}
+
+/* Enhanced print styles */
+@media print {
+  .banana-fab,
+  .widget-add-fab,
+  .edit-mode-hint {
+    display: none !important;
+  }
 }

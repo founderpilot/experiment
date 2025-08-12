@@ -1,70 +1,135 @@
-# Getting Started with Create React App
+# Banana Pro - Crypto Trading Dashboard
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern, responsive crypto trading dashboard built with React and Bootstrap-inspired components.
 
-## Available Scripts
+## ✨ New Features
 
-In the project directory, you can run:
+### 🎨 Edit Layout Mode
+- **Edit Layout Button**: Added to each template in the template selector for quick access
+- **Visual Indicators**: Clear visual feedback when hovering over draggable widgets
+- **Drag & Drop**: Intuitive cursor changes (grab/grabbing) for widget repositioning
+- **Resize Handles**: Enhanced resize handles with visual feedback
+- **Edit Mode Hint**: Helpful tooltip showing available actions
 
-### `npm start`
+### 🖼️ Enhanced Widget Previews
+- **Visual Previews**: Each widget now shows a preview with hover effects
+- **Interactive Elements**: Hover overlays with add widget buttons
+- **Category Badges**: Color-coded categories for easy identification
+- **Responsive Design**: Optimized for both desktop and mobile
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 🚀 Popular Widgets Category
+- **New "Popular" Category**: Features the most essential widgets (Watchlist, Chart, Positions)
+- **Enhanced Visual Treatment**: Special styling and animations for popular widgets
+- **Floating Particles**: Dynamic particle effects for popular widget cards
+- **Priority Placement**: Popular widgets are highlighted and easier to find
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 🎯 Super Dynamic Interactions
+- **Smooth Animations**: 60fps animations with cubic-bezier easing curves
+- **Hover Effects**: Rich hover states with transforms, shadows, and color changes
+- **Micro-interactions**: Subtle animations for buttons, icons, and form elements
+- **Buffer Effects**: Smooth transitions and visual feedback throughout
+- **Responsive Animations**: Optimized animations for different screen sizes
 
-### `npm test`
+### 🎨 Visual Enhancements
+- **Enhanced Cursors**: Dynamic cursor changes for different interactions
+- **Gradient Overlays**: Beautiful gradient effects on hover and focus
+- **Shadow Systems**: Layered shadow effects for depth and hierarchy
+- **Color Transitions**: Smooth color transitions with yellow accent theme
+- **Particle Effects**: Floating particles and shimmer animations
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 🎯 Improved User Experience
+- **Template Selection**: Easy template switching with edit layout options
+- **Visual Feedback**: Hover effects and animations throughout the interface
+- **Mobile Optimization**: Responsive design with touch-friendly controls
+- **Accessibility**: Clear visual indicators and intuitive interactions
+- **Performance**: Optimized animations with hardware acceleration
 
-### `npm run build`
+## 🚀 Getting Started
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Install dependencies:
+   ```bash
+   yarn install
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. Start the development server:
+   ```bash
+   yarn start
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-### `npm run eject`
+## 🎮 How to Use
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Template Selection
+1. Click the "Templates" button in the header
+2. Choose from Beginner, Intermediate, or Advanced layouts
+3. Use "Edit Layout" to immediately enter edit mode with that template
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Edit Mode
+1. Click the "Edit Layout" button (yellow plus icon)
+2. Drag widgets to reposition them
+3. Resize widgets using the bottom-right corner handles
+4. Add new widgets using the green "+" button
+5. Save your layout or reset to defaults
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Widget Management
+1. Hover over widgets to see visual indicators
+2. Use the widget selector to add new widgets
+3. Each widget shows a preview and description
+4. Categories help organize different widget types
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 🛠️ Technical Features
 
-## Learn More
+- **React Grid Layout**: Responsive grid system for widget positioning
+- **Tailwind CSS**: Utility-first CSS framework for styling
+- **Lucide Icons**: Beautiful, customizable icons
+- **Responsive Design**: Mobile-first approach with breakpoint optimization
+- **Local Storage**: Layout persistence across sessions
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 📱 Responsive Breakpoints
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **Mobile**: < 768px (xs, xxs layouts)
+- **Tablet**: 768px - 1024px (sm, md layouts)
+- **Desktop**: > 1024px (lg layout)
 
-### Code Splitting
+## 🎨 Customization
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+The dashboard uses CSS custom properties for theming:
+- Primary color: Yellow (#FFD700)
+- Background: Dark theme with subtle gradients
+- Accent colors: Category-specific color coding
 
-### Analyzing the Bundle Size
+## 🔧 Development
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### File Structure
+```
+src/
+├── components/          # React components
+│   ├── ui/             # Reusable UI components
+│   ├── TemplateSelector.jsx
+│   ├── WidgetSelector.jsx
+│   └── TradingDashboard.jsx
+├── data/               # Mock data and configurations
+├── hooks/              # Custom React hooks
+└── styles/             # CSS and styling
+```
 
-### Making a Progressive Web App
+### Key Components
+- **TradingDashboard**: Main dashboard with grid layout
+- **TemplateSelector**: Template selection modal
+- **WidgetSelector**: Widget library and management
+- **AllWidgets**: Individual widget implementations
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 🚀 Future Enhancements
 
-### Advanced Configuration
+- [ ] Real-time data integration
+- [ ] Advanced charting capabilities
+- [ ] User authentication and profiles
+- [ ] Custom widget creation
+- [ ] Theme customization
+- [ ] Export/import layouts
+- [ ] Collaborative features
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 📄 License
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is licensed under the MIT License.

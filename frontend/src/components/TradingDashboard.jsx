@@ -11,7 +11,8 @@ import {
   Sparkles,
   Eye,
   Grid3X3,
-  Trash2
+  Trash2,
+  Edit3
 } from 'lucide-react';
 import { mockCryptoData, dashboardTemplates, widgetLibrary } from '../data/mockData';
 import {
@@ -116,7 +117,7 @@ const BananaPro = () => {
         md: dashboardTemplates[currentTemplate].layout,
         sm: dashboardTemplates[currentTemplate].layout.map(item => ({...item, w: Math.min(item.w, 6), x: item.x % 6})),
         xs: dashboardTemplates[currentTemplate].layout.map(item => ({...item, w: Math.min(item.w, 4), x: item.x % 4})),
-        xxs: dashboardTemplates[currentTemplate].layout.map(item => ({...item, w: 2, x: 0}))
+        xxs: dashboardTemplates.beginner.layout.map(item => ({...item, w: 2, x: 0}))
       });
     }
   };
@@ -146,6 +147,21 @@ const BananaPro = () => {
       xxs: template.layout.map(item => ({...item, w: 2, x: 0}))
     });
     setIsEditMode(false);
+  };
+
+  const handleEditLayout = (templateKey) => {
+    setCurrentTemplate(templateKey);
+    const template = dashboardTemplates[templateKey];
+    setLayouts({
+      lg: template.layout,
+      md: template.layout,
+      sm: template.layout.map(item => ({...item, w: Math.min(item.w, 6), x: item.x % 6})),
+      xs: template.layout.map(item => ({...item, w: Math.min(item.w, 4), x: item.x % 4})),
+      xxs: template.layout.map(item => ({...item, w: 2, x: 0}))
+    });
+    setIsEditMode(true);
+    setShowTemplateSelector(false);
+    setShowHint(false);
   };
 
   const toggleEditMode = () => {
@@ -246,143 +262,140 @@ const BananaPro = () => {
   const currentWidgets = layouts.lg || [];
 
   return (
-    <div className="min-h-screen bg-background p-2 md:p-4">
+    <div className={`min-h-screen bg-background p-2 md:p-4 ${isEditMode ? 'edit-mode' : ''}`}>
       {/* Header */}
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-4 md:mb-6 gap-4">
-        <div>
-          <h1 className="text-xl md:text-3xl font-bold text-yellow-400">🍌 Banana Pro</h1>
-          <p className="text-sm md:text-base text-muted-foreground">
+        <div className="animate-in slide-in-from-left duration-700">
+          <h1 className="text-xl md:text-3xl font-bold text-yellow-400 transition-all duration-500 hover:scale-105 hover:drop-shadow-lg">
+            🍌 Banana Pro
+          </h1>
+          <p className="text-sm md:text-base text-muted-foreground transition-colors duration-300 hover:text-yellow-400/80">
             {dashboardTemplates[currentTemplate].name} • {currentWidgets.length} widgets active
           </p>
         </div>
         
-        <div className="flex items-center gap-2 w-full md:w-auto">
+        <div className="flex items-center gap-2 w-full md:w-auto animate-in slide-in-from-right duration-700">
           <Button
             variant="outline"
             onClick={() => setShowTemplateSelector(true)}
-            className="flex items-center gap-2 flex-1 md:flex-none text-xs md:text-sm"
+            className="flex items-center gap-2 flex-1 md:flex-none text-xs md:text-sm transition-all duration-300 hover:border-yellow-400 hover:text-yellow-400 hover:scale-105 hover:shadow-lg hover:shadow-yellow-400/25"
             size={isMobile ? "sm" : "default"}
           >
-            <Settings size={14} />
+            <Settings size={14} className="transition-transform duration-300 hover:rotate-90" />
             {isMobile ? 'Templates' : 'Templates'}
           </Button>
           
-          {isEditMode && (
-            <>
+          {isEditMode ? (
+            <div className="flex gap-2 animate-in slide-in-from-top duration-500">
               <Button
                 variant="outline"
                 onClick={handleReset}
-                className="flex items-center gap-2 text-xs md:text-sm"
+                className="flex items-center gap-2 text-xs md:text-sm transition-all duration-300 hover:border-red-400 hover:text-red-400 hover:scale-105"
                 size={isMobile ? "sm" : "default"}
               >
-                <RotateCcw size={14} />
-                {!isMobile && 'Reset'}
+                <RotateCcw size={14} className="transition-transform duration-300 hover:rotate-180" />
+                {isMobile ? 'Reset' : 'Reset Layout'}
               </Button>
               <Button
                 variant="outline"
                 onClick={handleCancel}
-                className="flex items-center gap-2 text-xs md:text-sm"
+                className="flex items-center gap-2 text-xs md:text-sm transition-all duration-300 hover:border-gray-400 hover:text-gray-400 hover:scale-105"
                 size={isMobile ? "sm" : "default"}
               >
-                <X size={14} />
-                {!isMobile && 'Cancel'}
+                <X size={14} className="transition-transform duration-300 hover:rotate-90" />
+                {isMobile ? 'Cancel' : 'Cancel'}
               </Button>
               <Button
                 onClick={handleSave}
-                className="bg-yellow-400 text-black hover:bg-yellow-500 flex items-center gap-2 text-xs md:text-sm"
+                className="flex items-center gap-2 text-xs md:text-sm bg-yellow-400 text-black hover:bg-yellow-500 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-yellow-400/25"
                 size={isMobile ? "sm" : "default"}
               >
-                <Save size={14} />
-                Save
+                <Save size={14} className="transition-transform duration-300 hover:scale-110" />
+                {isMobile ? 'Save' : 'Save Layout'}
               </Button>
-            </>
+            </div>
+          ) : (
+            <Button
+              onClick={toggleEditMode}
+              className="flex items-center gap-2 text-xs md:text-sm bg-yellow-400 text-black hover:bg-yellow-500 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-yellow-400/25"
+              size={isMobile ? "sm" : "default"}
+            >
+              <Edit3 size={14} className="transition-transform duration-300 hover:rotate-12" />
+              {isMobile ? 'Edit' : 'Edit Layout'}
+            </Button>
           )}
         </div>
       </div>
 
-      {/* Hint Chip */}
-      {showHint && !isEditMode && (
-        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50">
-          <Badge 
-            variant="secondary" 
-            className="bg-yellow-400/20 text-yellow-400 border-yellow-400/50 px-3 py-2 text-xs animate-pulse"
-          >
-            <Sparkles className="w-3 h-3 mr-2" />
-            Tap 🍌 to customize
-          </Badge>
+      {/* Edit Mode Hint */}
+      {isEditMode && showHint && (
+        <div className="edit-mode-hint animate-in slide-in-from-top duration-500">
+          ✨ Drag widgets to reposition • Drag corners to resize • Use the + button to add more widgets
         </div>
       )}
 
-      {/* Edit Mode Banner */}
-      {isEditMode && (
-        <div className="mb-4 p-3 md:p-4 bg-yellow-400/10 border border-yellow-400/30 rounded-lg">
-          <div className="flex items-center gap-2 text-yellow-400">
-            <Eye className="w-4 h-4 md:w-5 md:h-5" />
-            <span className="font-medium text-sm md:text-base">Edit Mode Active</span>
-            <Badge variant="outline" className="ml-auto border-yellow-400 text-yellow-400 text-xs">
-              {isMobile ? 'Drag widgets' : 'Drag & Resize widgets'}
-            </Badge>
+      {/* Hint Chip */}
+      {!isEditMode && showHint && (
+        <div className="flex items-center justify-center mb-4 animate-in slide-in-from-top duration-500">
+          <div className="bg-yellow-400/10 border border-yellow-400/20 rounded-full px-4 py-2 text-sm text-yellow-400/80 backdrop-blur-sm transition-all duration-300 hover:bg-yellow-400/20 hover:border-yellow-400/40 hover:text-yellow-400 hover:scale-105">
+            💡 Click the yellow button to customize your dashboard
           </div>
         </div>
       )}
 
       {/* Dashboard Grid */}
-      <div className="widget-grid">
+      <div className="relative">
         <ResponsiveGridLayout
           className="layout"
           layouts={layouts}
-          onLayoutChange={handleLayoutChange}
           breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-          cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
+          cols={{ lg: 12, md: 12, sm: 6, xs: 4, xxs: 2 }}
+          rowHeight={80}
+          onLayoutChange={handleLayoutChange}
           isDraggable={isEditMode}
-          isResizable={isEditMode && !isMobile}
-          margin={[8, 8]}
-          containerPadding={[0, 0]}
-          rowHeight={isMobile ? 50 : 60}
+          isResizable={isEditMode}
           draggableHandle=".widget-card"
+          margin={[16, 16]}
+          containerPadding={[16, 16]}
+          useCSSTransforms={true}
+          transformScale={1}
+          preventCollision={false}
           compactType="vertical"
+          className={`transition-all duration-500 ${isEditMode ? 'edit-mode-grid' : ''}`}
         >
-          {currentWidgets.map((item) => (
-            <div key={item.i} className="relative group">
-              {renderWidget(item)}
-              {isEditMode && (
-                <div className="absolute top-1 right-1 md:top-2 md:right-2 opacity-0 group-hover:opacity-100 transition-opacity flex gap-1">
-                  <Badge variant="secondary" className="text-xs">
-                    {item.w}×{item.h}
-                  </Badge>
-                  <Button
-                    size="sm"
-                    variant="destructive"
-                    className="w-6 h-6 p-0"
-                    onClick={() => handleRemoveWidget(item.i)}
-                  >
-                    <Trash2 className="w-3 h-3" />
-                  </Button>
+          {currentWidgets.map((widget) => {
+            const WidgetComponent = widgetComponents[widget.widgetType];
+            if (!WidgetComponent) return null;
+
+            return (
+              <div key={widget.i} className="widget-container">
+                <div className="widget-card h-full flex items-center justify-center transition-all duration-500 hover:shadow-lg hover:shadow-yellow-400/10">
+                  <WidgetComponent data={mockCryptoData} />
                 </div>
-              )}
-            </div>
-          ))}
+              </div>
+            );
+          })}
         </ResponsiveGridLayout>
       </div>
 
       {/* Widget Add FAB - Only show in edit mode */}
       {isEditMode && (
         <button
-          className="widget-add-fab"
+          className="widget-add-fab animate-in slide-in-from-bottom duration-500"
           onClick={() => setShowWidgetSelector(true)}
           title="Add Widget"
         >
-          <Grid3X3 size={20} />
+          <Grid3X3 size={20} className="transition-transform duration-300 hover:rotate-90" />
         </button>
       )}
 
       {/* Main FAB */}
       <button
-        className={`banana-fab ${isEditMode ? 'pulse-animation' : ''}`}
+        className={`banana-fab ${isEditMode ? 'pulse-animation' : ''} animate-in slide-in-from-bottom duration-700`}
         onClick={toggleEditMode}
         title={isEditMode ? "Exit Edit Mode" : "Customize Dashboard"}
       >
-        {isEditMode ? <X size={isMobile ? 20 : 24} /> : <Plus size={isMobile ? 20 : 24} />}
+        {isEditMode ? <X size={isMobile ? 20 : 24} className="transition-transform duration-300 hover:rotate-90" /> : <Plus size={isMobile ? 20 : 24} className="transition-transform duration-300 hover:rotate-45" />}
       </button>
 
       {/* Template Selector Modal */}
@@ -392,6 +405,7 @@ const BananaPro = () => {
         templates={dashboardTemplates}
         currentTemplate={currentTemplate}
         onSelectTemplate={handleTemplateSelect}
+        onEditLayout={handleEditLayout}
       />
 
       {/* Widget Selector Modal */}

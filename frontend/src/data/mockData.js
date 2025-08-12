@@ -190,7 +190,7 @@ export const widgetLibrary = [
   {
     id: 'watchlist',
     name: 'Watchlist',
-    category: 'Market',
+    category: 'Popular',
     description: 'Track favorite crypto pairs',
     icon: 'Star',
     preview: 'Live price tracking with 24h changes'
@@ -198,10 +198,18 @@ export const widgetLibrary = [
   {
     id: 'chart',
     name: 'Chart',
-    category: 'Analysis', 
+    category: 'Popular', 
     description: 'Price charts and technical analysis',
     icon: 'BarChart3',
     preview: 'Interactive price charts with indicators'
+  },
+  {
+    id: 'positions',
+    name: 'Positions',
+    category: 'Popular',
+    description: 'Open trading positions',
+    icon: 'Target',
+    preview: 'Active positions with P&L tracking'
   },
   {
     id: 'buy',
@@ -218,14 +226,6 @@ export const widgetLibrary = [
     description: 'Place sell orders',
     icon: 'TrendingDown',
     preview: 'Quick sell interface with profit targets'
-  },
-  {
-    id: 'positions',
-    name: 'Positions',
-    category: 'Trading',
-    description: 'Open trading positions',
-    icon: 'Target',
-    preview: 'Active positions with P&L tracking'
   },
   {
     id: 'pendingorders',
