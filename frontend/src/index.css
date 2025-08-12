@@ -56,9 +56,16 @@ code {
   }
 }
 
-/* Custom CSS for crypto dashboard */
+/* Mobile-first responsive design */
 .widget-grid {
   height: calc(100vh - 120px);
+  min-height: 500px;
+}
+
+@media (max-width: 768px) {
+  .widget-grid {
+    height: calc(100vh - 140px);
+  }
 }
 
 .widget-card {
@@ -66,6 +73,7 @@ code {
   border: 1px solid hsl(var(--border));
   border-radius: var(--radius);
   transition: all 0.3s ease;
+  overflow: hidden;
 }
 
 .widget-card:hover {
@@ -73,10 +81,11 @@ code {
   box-shadow: 0 4px 20px rgba(255, 215, 0, 0.1);
 }
 
-.trading-fab {
+/* Mobile FAB positioning */
+.banana-fab {
   position: fixed;
-  bottom: 2rem;
-  right: 2rem;
+  bottom: 1rem;
+  right: 1rem;
   background: linear-gradient(135deg, hsl(var(--primary)), hsl(60 90% 45%));
   color: hsl(var(--primary-foreground));
   border: none;
@@ -86,11 +95,54 @@ code {
   box-shadow: 0 8px 32px rgba(255, 215, 0, 0.3);
   transition: all 0.3s ease;
   z-index: 1000;
+  touch-action: manipulation;
 }
 
-.trading-fab:hover {
+@media (min-width: 768px) {
+  .banana-fab {
+    bottom: 2rem;
+    right: 2rem;
+    width: 64px;
+    height: 64px;
+  }
+}
+
+.banana-fab:hover {
   transform: scale(1.1);
   box-shadow: 0 12px 40px rgba(255, 215, 0, 0.4);
+}
+
+.banana-fab:active {
+  transform: scale(0.95);
+}
+
+/* Widget Add FAB */
+.widget-add-fab {
+  position: fixed;
+  bottom: 5rem;
+  right: 1rem;
+  background: linear-gradient(135deg, hsl(120 50% 45%), hsl(120 60% 40%));
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  box-shadow: 0 6px 24px rgba(34, 197, 94, 0.3);
+  transition: all 0.3s ease;
+  z-index: 999;
+  touch-action: manipulation;
+}
+
+@media (min-width: 768px) {
+  .widget-add-fab {
+    bottom: 6rem;
+    right: 2rem;
+  }
+}
+
+.widget-add-fab:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 32px rgba(34, 197, 94, 0.4);
 }
 
 .price-up {
@@ -108,4 +160,84 @@ code {
 
 .pulse-animation {
   animation: pulse-glow 2s infinite;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .widget-card {
+    padding: 0.5rem;
+  }
+  
+  .widget-card .p-6 {
+    padding: 1rem;
+  }
+  
+  .widget-card .p-4 {
+    padding: 0.75rem;
+  }
+  
+  .widget-card .text-lg {
+    font-size: 1rem;
+  }
+  
+  .widget-card .text-xl {
+    font-size: 1.125rem;
+  }
+}
+
+/* Grid layout responsive adjustments */
+.react-grid-layout {
+  position: relative;
+}
+
+.react-grid-item {
+  transition: all 200ms ease;
+  transition-property: left, top;
+}
+
+.react-grid-item.cssTransforms {
+  transition-property: transform;
+}
+
+.react-grid-item > .react-resizable-handle {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  bottom: 0;
+  right: 0;
+  background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNiIgaGVpZ2h0PSI2IiB2aWV3Qm94PSIwIDAgNiA2IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8ZG90cyBmaWxsPSIjODg4IiBkPSJtIDEsNSAxLDAgMCwtMSAtMSwwIHogbSAwLC0zIDEsMCAwLC0xIC0xLDAgeiIvPgo8L3N2Zz4K');
+  background-position: bottom right;
+  padding: 0 3px 3px 0;
+  background-repeat: no-repeat;
+  background-origin: content-box;
+  box-sizing: border-box;
+  cursor: se-resize;
+}
+
+.react-grid-item.react-grid-placeholder {
+  background: rgba(255, 215, 0, 0.2);
+  opacity: 0.2;
+  transition-duration: 100ms;
+  z-index: 2;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+/* Mobile drag handle improvements */
+@media (max-width: 768px) {
+  .react-grid-item > .react-resizable-handle {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+/* Line clamp utilities */
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
